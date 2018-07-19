@@ -6,7 +6,7 @@ from crispy_forms.bootstrap import (
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from page.models import Pages
 
-class PageCreateForm(forms.ModelForm):
+class PageForumForm(forms.ModelForm):
 	content = forms.CharField(widget=CKEditorUploadingWidget())
 	
 	helper = FormHelper()
@@ -20,7 +20,7 @@ class PageCreateForm(forms.ModelForm):
         Field('slug', css_class='input-sm'),
         Field('content', css_class='input-sm'),
         Field('is_active', css_class='input-sm'),
-        FormActions(Submit('page_create', 'page_create', css_class='btn-primary'))
+        FormActions(Submit('page_forum', 'page_forum', css_class='btn-primary'))
     )
 	class Meta:
 		model = Pages

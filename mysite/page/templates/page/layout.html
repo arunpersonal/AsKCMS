@@ -6,13 +6,13 @@
 		<p>My Menus</p>
 		{% for page in object_list %}
 			<li>
-				<a href="#" onclick="dispPage('{{page.id}}')">{{page}}</a><span style=float:right;><button><i class="far fa-edit"></i></button>&nbsp;<button><i class="far fa-eye-slash"></i></button>
+				<a href="#" onclick="dispPage('{{page.id}}')">{{page}}<span style=float:right;><button><i class="far fa-edit"></i></button>&nbsp;<button><i class="far fa-eye-slash"></i></button></span></a>
 			</li>
 		{% endfor %}
 	</ul>
 	<ul class="list-unstyled CTAs">
 		<li>
-			<a href="#" class="download" onclick="createPage()">Add Page</a>
+			<a href="#" class="download" onclick="addPage()">Add Page</a>
 		</li>
 	</ul>
 {% endblock %}
@@ -22,11 +22,12 @@
 {% block script %}
 {{ block.super }}
 <script type="text/javascript">
-	function createPage(){
+	function addPage(){
 		$.ajax({
 			'url' : '/page_forum/',
 			'type' : 'GET',
 			'success' : function(data) {
+				console.log(data)
 				$('#containerBody').html(data)
 			}
 		});

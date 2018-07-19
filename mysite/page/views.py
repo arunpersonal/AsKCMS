@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
-from django.views.generic.edit import FormView
-from django.http import HttpResponse 
+from django.views.generic.edit import FormView, CreateView
+from django.http import HttpResponse, HttpResponseRedirect 
 from django.shortcuts import get_object_or_404
 from django.core import serializers
 
 from page.models import Pages
-from page.forms import PageCreateForm
+from page.forms import PageForumForm
 
 import json
 
@@ -20,13 +20,22 @@ class MysitePageLayoutView(ListView):
 
 class MysitePageFormView(FormView):
     template_name = 'page/forum.html'
-    form_class = PageCreateForm
+    form_class = PageForumForm
     success_url = '/page/'
 
     def form_valid(self, form):
         form.save()
         return super(MysitePageFormView, self).form_valid(form)
-        
+
+class MysitePageCreateView(CreateView):
+    model = Pages
+    template_name = 'page/forum.html'
+    form_class = PageForumForm
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
 class MysitePageDetailView(TemplateView):
     def get(self, request, *args, **kwargs):
             my_object = Pages.objects.filter(pk=request.GET['id'])
