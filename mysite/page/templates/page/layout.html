@@ -1,0 +1,47 @@
+{% extends "common/base.html" %}
+{% block title %}mysite CMS{% endblock %}
+{% block brand %}AsK CMS{% endblock %}
+{% block menus %}
+	<ul class="list-unstyled components">
+		<p>My Menus</p>
+		{% for page in object_list %}
+			<li>
+				<a href="#" onclick="dispPage('{{page.id}}')">{{page}}</a><span style=float:right;><button><i class="far fa-edit"></i></button>&nbsp;<button><i class="far fa-eye-slash"></i></button>
+			</li>
+		{% endfor %}
+	</ul>
+	<ul class="list-unstyled CTAs">
+		<li>
+			<a href="#" class="download" onclick="createPage()">Add Page</a>
+		</li>
+	</ul>
+{% endblock %}
+{% block container %}
+    <div id="containerBody"></div>
+{% endblock %}
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+	function createPage(){
+		$.ajax({
+			'url' : '/page_forum/',
+			'type' : 'GET',
+			'success' : function(data) {
+				$('#containerBody').html(data)
+			}
+		});
+	}
+
+	function dispPage(id){
+		$.ajax({
+			'url' : '/page_detail/',
+			'type' : 'GET',
+			'data': { 'id': id },
+			'dataType': "json",
+			'success' : function(data) {
+				$('#containerBody').html(data[0].fields.content)
+			}
+		});
+	}
+</script>
+{% endblock %}

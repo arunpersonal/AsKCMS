@@ -17,6 +17,3 @@ class Pages(models.Model):
 
 	def __str__(self):
 		return self.menu_title
-
-	def get_absolute_url(self):
-		return u'/pages/'

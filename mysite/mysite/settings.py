@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
+    'crispy_forms',
 
     'page',
 ]
@@ -147,3 +148,5 @@ CKEDITOR_CONFIGS = {
 }
 
 ###################################
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
